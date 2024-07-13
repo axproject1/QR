@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event - Attendance System</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Create Event</h1>
+            <p class="lead">Enter event details:</p>
+        </div>
+        
+        <!-- Formulario para crear evento -->
+        <form id="create-event-form">
+            <!-- Campos del formulario -->
+            <label for="event-name">Event Name:</label><br>
+            <input type="text" id="event-name" name="event-name" required><br><br>
+
+            <label for="event-date">Event Date:</label><br>
+            <input type="date" id="event-date" name="event-date" required><br><br>
+
+            <label for="event-location">Event Location:</label><br>
+            <input type="text" id="event-location" name="event-location" required><br><br>
+
+            <button type="submit" class="btn btn-primary">Create Event</button>
+        </form>
+
+        <!-- Mensaje de confirmación -->
+        <div id="confirmation-message" style="display: none;">
+            <p>Event created successfully!</p>
+            <!-- Contenedor para mostrar el QR generado -->
+            <div id="qr-container"></div>
+            <!-- Botón para descargar QR -->
+            <a id="download-link" style="display: none;">
+                <button class="btn btn-primary">Download QR</button>
+            </a>
+            <!-- Botón para abrir la cámara -->
+            <button id="open-camera-btn" class="btn btn-secondary">Open Camera for QR Scan</button>
+        </div>
+
+        <!-- Botón de navegación -->
+        <div class="navigation">
+            <a href="index.html" class="btn btn-secondary">Back to Menu</a>
+        </div>
+    </div>
+
+    <!-- Scripts para manejar la creación de evento y generación de QR -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4"></script>
+    <script>
+        // Función para generar el QR
+        function generateQR(eventData) {
+            const qrContainer = document.getElementById('qr-container');
+            const qr = new QRCode(qrContainer, {
+                text: JSON.stringify(eventData),
+                width: 200,
+                height: 200
+            });
+
+            // Mostrar botón de descarga y ocultar formulario
+            document.getElementById('confirmation-message').style.display = 'block';
+            document.getElementById('create-event-form').style.display = 'none';
+            document.getElementById('download-link').style.display = 'inline-block';
+
+            // Actualizar enlace de descarga con el QR generado
+            const downloadLink = document.getElementById('download-link');
+            downloadLink.href = qr._canvas.toDataURL();
+            downloadLink.download = 'event_qr.png';
+        }
+
+        // Capturar el formulario de creación de evento
+        const createEventForm = document.getElementById('create-event-form');
+        // Escuchar el evento de envío del formulario
+        createEventForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío por defecto del formulario
+
+            // Obtener datos del formulario
+            const eventData = {
+                eventName: document.getElementById('event-name').value,
+                eventDate: document.getElementById('event-date').value,
+                eventLocation: document.getElementById('event-location').value
+            };
+
+            // Generar el QR
+            generateQR(eventData);
+        });
+
+        // Manejar la apertura de la cámara (simulado)
+        const openCameraBtn = document.getElementById('open-camera-btn');
+        openCameraBtn.addEventListener('click', function() {
+            alert('Opening camera for QR scan...');
+            // Aquí deberías implementar la lógica real para abrir la cámara y escanear QRs
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

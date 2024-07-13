@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Participant - Attendance System</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Register Participant</h1>
+            <p class="lead">Enter participant details:</p>
+        </div>
+        
+        <!-- Formulario para registrar participante -->
+        <form id="register-participant-form">
+            <!-- Campos del formulario -->
+            <label for="participant-name">Participant Name:</label><br>
+            <input type="text" id="participant-name" name="participant-name"><br><br>
+
+            <label for="participant-email">Participant Email:</label><br>
+            <input type="email" id="participant-email" name="participant-email"><br><br>
+
+            <label for="participant-phone">Participant Phone:</label><br>
+            <input type="tel" id="participant-phone" name="participant-phone"><br><br>
+
+            <button type="submit" class="btn btn-primary">Register Participant</button>
+        </form>
+
+        <!-- Mensaje de confirmación -->
+        <div id="confirmation-message" style="display: none;">
+            <p>Participant registered successfully!</p>
+        </div>
+
+        <!-- Botón de navegación -->
+        <div class="navigation">
+            <a href="index.html" class="btn btn-secondary">Back to Menu</a>
+        </div>
+    </div>
+
+    <!-- Script para manejar el registro de participante -->
+    <script>
+        // Capturar el formulario de registro de participante
+        const registerParticipantForm = document.getElementById('register-participant-form');
+        // Escuchar el evento de envío del formulario
+        registerParticipantForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío por defecto del formulario
+
+            // Simular proceso de registro de participante (puede ser sustituido por lógica real)
+            // Aquí se guardaría la información en la base de datos o localStorage
+
+            // Mostrar mensaje de confirmación y ocultar el formulario
+            document.getElementById('confirmation-message').style.display = 'block';
+            registerParticipantForm.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
+
+
+
